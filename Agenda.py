@@ -29,27 +29,63 @@ opcion = "n"
 agenda = {}
 
 while opcion != "e":
-	
+
+	'''Registro de nuevo contacto'''
 	if opcion == 'n':
 
 		print("Registro de nuevo contacto")
-		
 		nombre = input("Nombre: ")
 		paterno = input("Apellido paterno: ")
 		numero = input("Número telefónico: ")
 		mail = input("Correo electrónico: ")
 		edad = int(input("Edad: "))
 
-		agenda = {indice:[nombre, paterno, numero, mail, edad]}
-		++indice
+		agenda[indice] = [nombre, paterno, numero, mail, edad]
+		indice += 1
     
+    '''Búsqueda de contacto por nombre'''
 	elif opcion == 'b':
-		buscarNombre = input("Ingresa nombre del contacto: ")
-		'''@TODO implementar método para la búsqueda de contactos. '''
+
+		buscar = input("Ingresa nombre del contacto: ")
+
+		for item in agenda:
+
+			if buscar in agenda[item]:
+
+				print("********** Información del contacto **********")
+				print("\n")
+				print("Nombre: ",agenda[item][CONST_NOMBRE], agenda[item][CONST_PATERNO])
+				print("Tel: ", agenda[item][CONST_NUMERO])
+				print("Email: ", agenda[item][CONST_EMAIL])
+				print("\n")
+				print("****************************************")
+				resultado = 1
+
+			else:
+				resultado = 0
+
+		if resultado == 0:
+			print("****************************************\n")
+			print("No se encontraron resultados\n")		
+			print("****************************************\n")
+
+    '''Listado de todos los contactos'''
+	elif opcion == 'l':
+
+		print("********** Lista de contactos **********")
+		
+		for item in agenda:
+			print("\n")
+			print("Nombre: ",agenda[item][CONST_NOMBRE], agenda[item][CONST_PATERNO])
+			print("Tel: ", agenda[item][CONST_NUMERO])
+			print("Email: ", agenda[item][CONST_EMAIL])
+			print("\n")
+
+		print("****************************************")
 
 	else :
 		print("Opcion no valida..!")
 
 	print("Eleje una opcion: ")
-	print("Nuevo contacto (n)\tBuscar (b)\tSalir (e)")
+	print("(n) Nuevo contacto\t(b) Buscar\t(l) Listar agenda\t(e) Salir")
 	opcion = input("Ingresa opcion: ")
